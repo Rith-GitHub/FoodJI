@@ -11,7 +11,7 @@ public class getIngredient {
             id = Integer.parseInt(inputID);
         }
         catch(Exception e) {
-            return "Invalid ID";
+            return null;
         }
         for (i = 0; i < ingredientsArray.length(); i++) {
             String [] entryList = ingredientsArray.get(i);
