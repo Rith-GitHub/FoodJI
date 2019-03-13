@@ -1,0 +1,176 @@
+Index,Name,Cereals,Condiments,Dairy,Eggs,Fats & Oils,Flour,Fruits,Herbs; Spices; Dry Seasonings; and Broths,Leavening Agents,Meat & Poultry,Nuts; Seeds; & Beans,Seafood,Sweeteners,Vegetables,Alcohol,Grain,Category,Season
+0,Acesulfame Potassium,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Artificial,NA
+1,Acorn Squash,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Squash,Winter
+2,Agar,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Seaweed,All Year
+3,Agave Syrup,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Syrup,NA
+4,Aji Amarillo,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Pepper,All Year
+5,Ajwain,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Herb,NA
+6,Ají Dulce,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Pepper,All Year
+7,Alcohol,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Alcohol,
+8,Alfalfa,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Legume,All Year
+9,Allspice,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+10,Almond,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Nuts,Fall
+11,Almond Extract,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Extract,NA
+12,Amaranth,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Herb,All Year
+13,Anchovy,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Fish,NA
+14,Anise,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Spice,NA
+15,Annatto,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+16,Apple,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Apple,Fall
+17,Applesauce,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Sauce,NA
+18,Apricot,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Stone Fruit,Summer
+19,Arrowroot,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Starch,All Year
+20,Artichoke,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Green,Spring
+21,Arugula,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Green,All Year
+22,Asafoetida,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+23,Asian Pear,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Pear,Summer
+24,Asparagus,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Shoots,Spring
+25,Aspartame,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Artificial,NA
+26,Avocado,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Stone Fruit,Spring
+27,Azuki Bean,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Legume,All Year
+28,Bacon,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Pork,NA
+29,Bagoong Alamang,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Sauce,NA
+30,Baharat,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Mix,NA
+31,Baking Powder,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Baking,NA
+32,Baking Soda,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Baking,NA
+33,Bamboo Shoot,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Shoots,All Year
+34,Banana,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Plantain,All Year
+35,Barley,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Herb,NA
+36,Basil,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Herb,All Year
+37,Basmati Rice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Rice,All Year
+38,Bay Leaf,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Green,All Year
+39,Bean Sprout,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Legume,All Year
+40,Beef,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Beef,NA
+41,Beer ,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Alcohol,NA
+42,Beet,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Root,Winter
+43,Bell Pepper,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Pepper,Fall
+44,Berbere,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Mix,NA
+45,Biltong,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Cured Meat,NA
+46,Bison,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Buffalo,NA
+47,Bitter Melon,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Squash,Summer
+48,Black Bean,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Legume,All Year
+49,Black Salt,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Salt,NA
+50,Black-eyed Pea,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Legume,All Year
+51,Blackberry,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Berry,Summer
+52,Blackcurrant,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Berry,Summer
+53,Blood,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Blood,NA
+54,Blueberry,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Berry,Summer
+55,Bok Choy,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Green,All Year
+56,Bonito Flakes,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,Fish,All Year
+57,Bouillon Cube,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Stock,NA
+58,Bouquet Garni,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Mix,NA
+59,Brandy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Alcohol,NA
+60,Bread Crumb,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Bread,NA
+61,Breadfruit,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Jackfruit,All Year
+62,Brie Cheese,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Cheese,All Year
+63,Broad Bean,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Legume,Summer
+64,Broccoflower,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,Winter
+65,Broccoli,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,Summer
+66,Broccoli Rabe,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,Spring
+67,Broccolini,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,Spring
+68,Brown Sugar,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Sugar,NA
+69,Brussels Sprout,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,Winter
+70,Buckwheat,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Staple,Winter
+71,Bulgar,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Wheat,NA
+72,Butter,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,Butter,NA
+73,Buttermilk,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Butter,NA
+74,Butternut Squash,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Squash,Fall
+75,Cabbage,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,All Year
+76,Cake Flour,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Baking,NA
+77,Calabaza,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Squash,All Year
+78,Camembert Cheese,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Cheese,NA
+79,Candlenut,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Nuts,NA
+80,Cane Sugar,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Sugar,NA
+81,Cane Syrup,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Syrup,NA
+82,Cannabis,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Illegal,NA
+83,Canola Oil,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Neutral Flavor Oil,NA
+84,Caper,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,Caper,All Year
+85,Caraway,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+86,Cardamom,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+87,Cargamanto,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Bean,NA
+88,Carrot,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Root,All Year
+89,Cashew,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Nuts,All Year
+90,Cassava,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Root,All Year
+91,Castor Sugar,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Sugar,NA
+92,Cauliflower,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,All Year
+93,Caviar,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Roe,NA
+94,Cayenne Pepper,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Pepper,Summer
+95,Celery,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Green,All Year
+96,Celery Root,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Root,All Year
+97,Celery Seed,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seed,NA
+98,Chayote,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Squash,Fall
+99,Cheddar Cheese,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Cheese,NA
+100,Cherimoya,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Fruit,Winter
+101,Cherry,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Stone Fruit,Summer
+102,Chervil,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Herb,NA
+103,Chestnut,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Nuts,All Year
+104,Chicken,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Chicken,NA
+105,Chicken Stock,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Stock,NA
+106,Chickpea,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Legume,All Year
+107,Chickpea Flour,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Legume,NA
+108,Chicory,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Green,Summer
+109,Chiles,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Pepper,Fall
+110,Chili Powder,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+111,Chive,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Onion,All Year
+112,Chocolate,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Chocolate,NA
+113,Chocolate Chip,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Chocolate,NA
+114,Chokeberry,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Fruit,All Year
+115,Chorizo,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Sausage,NA
+116,Choy sum,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,All Year
+117,Chufa,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Root,All Year
+118,Ciabatta,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Bread,NA
+119,Cider,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Alcohol,NA
+120,Cider Vinegar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Fermented,NA
+121,Cilantro,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Green,All Year
+122,Cinnamon,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,All Year
+123,Citrus,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Citrus,All Year
+124,Clam,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Shellfish,NA
+125,Clotted Cream,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Dairy,NA
+126,Clove,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+127,Coconut,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Coconut,All Year
+128,Coconut Milk,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Coconut,NA
+129,Cod,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Fish,NA
+130,Coffee,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Coffee,NA
+131,Collard Greens,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Brassicas,All Year
+132,Conch,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Shellfish,NA
+133,Condensed Milk,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,Milk,NA
+134,Coriander,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+135,Corn,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Corn,Summer
+136,Corn Masa,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Corn,NA
+137,Corn Oil,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Corn,NA
+138,Corn Syrup,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Corn,NA
+139,Cornflour,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Corn,NA
+140,Cornish Game Hen,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Chicken,NA
+141,Cornmeal,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Corn,NA
+142,Cornstarch,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Corn,NA
+143,Cottage Cheese,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Cheese,NA
+144,Cottonseed Oil,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Oil,NA
+145,Court-bouillon,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Stock,NA
+146,Couscous,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Grain,NA
+147,Crab,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Shellfish,NA
+148,Crabstick,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Shellfish,NA
+149,Cracker,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Biscuit,NA
+150,Cranberry,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Fruit,All Year
+151,Crawfish,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Shellfish,NA
+152,Cream,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Dairy,NA
+153,Cream Cheese,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Cheese,NA
+154,Cream of Tartar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Acid,NA
+155,Crème de Menthe,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Alcohol,NA
+156,Crème Fraiche,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Sour Cream,NA
+157,Cucumber,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Squash,All Year
+158,Cilantro,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Green,All Year
+159,Cumin,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+160,Curd,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Milk,NA
+161,Currant,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Fruit,NA
+162,Curry Leaf,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Curry,NA
+163,Curry Powder,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Curry,NA
+164,Daikon,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Radish,All Year
+165,Dal,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,Dal,All Year
+166,Dandelion,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Green,All Year
+167,Dashi,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Broth,NA
+168,Date,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Fruit,All Year
+169,Demerara Sugar,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Sugar,NA
+170,Dijon Mustard,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Mustard,NA
+171,Dill,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Spice,NA
+172,Duck,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Duck,NA
+173,Duck Stock,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Stock,NA
+174,Durian,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Fruit,All Year
