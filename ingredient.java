@@ -15,9 +15,11 @@ public class getIngredient {
         }
         for (i = 0; i < ingredientsArray.length(); i++) {
             String [] entryList = ingredientsArray.get(i);
-            int entryID = Integer.parseInt(entryList[0]);
-            if (id == entryID) {
-                return entryList;
+            try {
+                int entryID = Integer.parseInt(entryList[0]);
+                if (id == entryID) {
+                    return entryList;
+                }
             }
         }
         return null;
