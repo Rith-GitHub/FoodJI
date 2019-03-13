@@ -42,4 +42,33 @@ public class pantry {
         return;
     }
     
+    public Arraylist<Object> filter(String[] category) {
+        Arraylist<Object[]> filterArray = new Arraylist<Object[]>;
+        for (c = 0; c < category.length(); c++) {
+            for (e = 2; e < 18; e++) {
+                if (c == pantry.get(0)[0][e]) {
+                    for (i = 1; i < pantry.length(); i++) {
+                        if (pantry.get(i)[0][e] == 1) {
+                            filterArray.add(pantry.get(i));
+                        }
+                    }
+                }
+            }
+        }
+        return filterArray;
+    }
+    public Arraylist<Object> filter(String category) {
+        Arraylist<Object[]> filterArray = new Arraylist<Object[]>;
+        for (e = 2; e < 18; e++) {
+            if (category == pantry.get(0)[0][e]) {
+                for (i = 1; i < pantry.length(); i++) {
+                    if (pantry.get(i)[0][e] == 1) {
+                        filterArray.add(pantry.get(i));
+                    }
+                }
+            }
+        }
+        return filterArray;
+    }
+
 }
