@@ -1,3 +1,4 @@
+import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,7 +11,7 @@ public class CSVReader {
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
-        Arraylist<String[]> alist = new Arraylist<String[]>();
+        ArrayList<String[]> alist = new ArrayList<String[]>();
         
         try {
             try {br = new BufferedReader(
