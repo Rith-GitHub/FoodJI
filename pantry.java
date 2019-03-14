@@ -1,21 +1,24 @@
+import java.util.*;
+
 public class pantry {
-    private Arraylist<Object[]> pantry = new Arraylist<Object[]>();
+    private ArrayList<Object[][]> pantry = new ArrayList<Object[][]>();
     
     public pantry() {
-        getIngredient;
+        getIngredient getIngredient;
     }
     
     public void addIngredient(String ID) {
         String[] ingredient = getIngredient.findEntry(ID);
         if (ingredient != null) {
             boolean flag = false;
-            for (i = 0; i < pantry.length(); i++) {
+            for (int i = 0; i < pantry.size(); i++) {
                 if (ingredient == pantry.get(i)[0]) {
                     flag = true;
                 }
             }
-            if (not flag) {
-                Object[] newEntry = new Object[] {ingredient, 0};
+            if (!flag) {
+                Integer[] a = new Integer[] {0};
+                Object[][] newEntry = new Object[][] {ingredient, a};
                 pantry.add(newEntry);
             }
             increaseAmount(ID);
@@ -27,14 +30,15 @@ public class pantry {
     public void increaseAmount(String ID) {
         String[] ingredient = getIngredient.findEntry(ID);
         Scanner sc = new Scanner(System.in);
-        try {int amount = sc.nextInt();}
+        int amount;
+        try {amount = sc.nextInt();} //**Change amount input method later
         catch(Exception e) {return;}
         
-        for (i = 0; i < pantry.length(); i++) {
+        for (int i = 0; i < pantry.size(); i++) {
             if (ingredient == pantry.get(i)[0]) {
-                String[] newEntry = pantry.get(i)[0];
-                int newAmount = pantry.get(i)[1] + amount;
-                Object[] newObj = new Object[] {newEntry, newAmount};
+                int a = (int) pantry.get(i)[1][0];
+                Integer[] newAmount = new Integer[] {a + amount};
+                Object[][] newObj = new Object[][] {pantry.get(i)[0], newAmount};
                 pantry.set(i, newObj);
                 return;
             }
@@ -42,12 +46,12 @@ public class pantry {
         return;
     }
     
-    public Arraylist<Object> filter(String[] category) {
-        Arraylist<Object[]> filterArray = new Arraylist<Object[]>;
-        for (c = 0; c < category.length(); c++) {
-            for (e = 2; e < 18; e++) {
-                if (c == pantry.get(0)[0][e]) {
-                    for (i = 1; i < pantry.length(); i++) {
+    /*public ArrayList<Object> filter(String[] category) {
+        ArrayList<Object[]> filterArray = new ArrayList<Object[]>();
+        for (int c = 0; c < category.length; c++) {
+            for (int e = 2; e < 18; e++) {
+                if (category[c] == pantry.get(0)[0][e]) {
+                    for (int i = 1; i < pantry.length(); i++) {
                         if (pantry.get(i)[0][e] == 1) {
                             filterArray.add(pantry.get(i));
                         }
@@ -56,13 +60,14 @@ public class pantry {
             }
         }
         return filterArray;
-    }
-    public Arraylist<Object> filter(String category) {
-        Arraylist<Object[]> filterArray = new Arraylist<Object[]>;
-        for (e = 2; e < 18; e++) {
-            if (category == pantry.get(0)[0][e]) {
-                for (i = 1; i < pantry.length(); i++) {
-                    if (pantry.get(i)[0][e] == 1) {
+    }*/
+    public ArrayList<Object[]> filter(String category) {
+        ArrayList<Object[]> filterArray = new ArrayList<Object[]>();
+        for (int e = 2; e < 18; e++) {
+            if (category == getIngredient.ingredientsArray.get(0)[e]) {
+                for (int i = 1; i < pantry.size(); i++) {
+                    int g = (int) pantry.get(i)[0][e];
+                    if (g == 1) {
                         filterArray.add(pantry.get(i));
                     }
                 }
