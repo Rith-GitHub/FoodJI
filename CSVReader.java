@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class CSVReader {
 
+    public CSVReader() {}
     public static ArrayList<String[]> readCSV(String csvFile) {
 
         BufferedReader br = null;
@@ -18,7 +19,7 @@ public class CSVReader {
                 new FileReader(csvFile));
             }
             catch(Exception e) {
-                return;
+                return null;
             }
             
             while ((line = br.readLine()) != null) {

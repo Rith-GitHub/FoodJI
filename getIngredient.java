@@ -1,14 +1,14 @@
 import java.util.*;
 
 public class getIngredient {
-    private static ArrayList<String[]> ingredientsArray = new ArrayList<String[]>();
+    public static ArrayList<String[]> ingredientsArray = new ArrayList<String[]>();
     
     public static void getIngredient(){
-        CSVReader CSVReader;
+        //CSVReader CSVReader;
         ingredientsArray = CSVReader.readCSV("ingredients.csv");
     }
     
-    public String[] findEntry (String inputID) {
+    public static String[] findEntry (String inputID) {
         int id;
         try {
             id = Integer.parseInt(inputID);
