@@ -12,7 +12,7 @@ class CSVReader:
 class getIngredient:
     
     def __init__(self):
-        self.ingredientsArray = readCSV('ingredients.csv')
+        self.ingredientsArray = CSVReader.readCSV('ingredients.csv')
         
     def findEntry(self, inputID):
         try:
@@ -30,42 +30,39 @@ class getIngredient:
     
     
 class pantry:
-    pantryList = [][]
-    
     def __init__(self):
-        getIng = getIngredient()
+        self.getIng = getIngredient()
+        self.pantryList = []
     
     def addIngredient(self, ID, amount):
-        ingredient = getIng.findEntry(ID)
+        ingredient = self.getIng.findEntry(ID)
         if ingredient != None:
             flag = False
-            for i in pantryList:
-                if ingredient == pantryList[1][0]:
+            for i in self.pantryList:
+                if ingredient == self.pantryList[i][0]:
                     flag = True
             if not flag:
                 newEntry = [ingredient,0]
-                pantry.append(newEntry)
-            increaseAmount(ID, amount);
+                self.pantryList.append(newEntry)
+            self.increaseAmount(ID, amount);
             return
         return
     
     def increaseAmount(self, ID, amount):
-        ingredient = getIng.findEntry(ID)
-        for i in pantryList:
-            if ingredient == pantryList[1][0]:
-                newAmount = int(pantryList[1][0] + amount)
-                pantryList[i] = [pantryList[1][0], newAmount]
+        ingredient = self.getIng.findEntry(ID)
+        for i in self.pantryList:
+            if ingredient == self.pantryList[i][0]:
+                newAmount = int(self.pantryList[i][0] + amount)
+                self.pantryList[i] = [self.pantryList[i][0], newAmount]
                 return
         return
     
     def filter(self, category):
-        filterArray = [][]
+        filterArray = []
         for e in range(2,18):
-            if category == getIng.ingredientsArray[0][e]:
-                for i in pantryList:
-                    g = int(pantryList[i][0][e])
+            if category == self.getIng.ingredientsArray[0][e]:
+                for i in self.pantryList:
+                    g = int(self.pantryList[i][0][e])
                     if g == 1:
-                        filterArray.append(pantryList[i])
+                        filterArray.append(self.pantryList[i])
         return filterArray
-    
-    
