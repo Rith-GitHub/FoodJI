@@ -7,19 +7,19 @@ class CSVReader:
     @staticmethod
     def readCSV(filepath):
         return [rows.strip().split(',') for rows in open(filepath)]
-
+    
+    
 class getIngredient:
-    ingredientsArray = []
     
     def __init__(self):
-        ingredientsArray = readCSV('ingredients.csv')
+        self.ingredientsArray = readCSV('ingredients.csv')
         
     def findEntry(self, inputID):
         try:
             id = int(inputID)
         except:
             return
-        for entryList in ingredientsArray:
+        for entryList in self.ingredientsArray:
             entryID = int(entryList[0])
             try:
                 if id == entryID:
@@ -27,7 +27,8 @@ class getIngredient:
             except:
                 pass
         return
-
+    
+    
 class pantry:
     pantryList = [][]
     
@@ -52,11 +53,19 @@ class pantry:
         ingredient = getIng.findEntry(ID)
         for i in pantryList:
             if ingredient == pantryList[1][0]:
-                newAmount = int(pantryList[1][0] + amount
+                newAmount = int(pantryList[1][0] + amount)
                 pantryList[i] = [pantryList[1][0], newAmount]
                 return
         return
-                                
+    
     def filter(self, category):
         filterArray = [][]
-        
+        for e in range(2,18):
+            if category == getIng.ingredientsArray[0][e]:
+                for i in pantryList:
+                    g = int(pantryList[i][0][e])
+                    if g == 1:
+                        filterArray.append(pantryList[i])
+        return filterArray
+    
+    
