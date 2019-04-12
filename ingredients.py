@@ -461,3 +461,4 @@ if DEBUG:
     meal = recipe.findEntry(1)
     dessert = recipe.findEntry('Yogurt & Fruit Parfaits')
     print('We will have ' + ' and '.join(map(str,[meal.getName(),dessert.getName()])))
+    print(meal.getIng())
