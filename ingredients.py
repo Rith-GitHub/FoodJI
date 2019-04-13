@@ -360,6 +360,21 @@ class recipe(databaseEntry):
         '''
         return self.cookTime
 
+    def getTotalT(self, calcHours = False):
+        '''Returns total time to complete recipe
+
+        :rtype: int
+        '''
+        totalTime = self.prepTime + self.cookTime
+        if calcHours and totalTime >= 60:
+            minutes = totalTime % 60
+            hours = (totalTime - minutes) / 60
+            return hours, minutes
+        elif calcHours:
+            return 0, totalTime
+        else:
+            return totalTime
+
     def getServing(self):
         '''Returns number of servings
 
@@ -433,18 +448,18 @@ class getRecipes:
 
     def findEntry(self, input = None):
         id = None
-        name = None
+        #name = None
         if input == None:
             return
         elif type(input) is int:
             id = int(input)
-        elif type(input) is str:
-            name = str(input)
+        #elif type(input) is str:
+        #    name = str(input)
         for entryNum in range(1, len(self.recipeArray)):
             entry = self.recipeArray[entryNum]
             entryID = entry.getID()
-            entryName = entry.getName()
-            if id == entryID or name == entryName:
+        #    entryName = entry.getName()
+            if id == entryID: #or name == entryName:
                 return entry
         return
 
@@ -460,6 +475,6 @@ if DEBUG:
     print(pantry.getPantryList(True))
 
     meal = recipe.findEntry(1)
-    dessert = recipe.findEntry('Yogurt & Fruit Parfaits')
-    print('We will have ' + ' and '.join(map(str,[meal.getName(),dessert.getName()])))
+    #dessert = recipe.findEntry('Yogurt & Fruit Parfaits')
+    print('Try ' + meal.getName())
     print(meal.getIng(True))
