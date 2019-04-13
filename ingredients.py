@@ -1,7 +1,9 @@
 from __future__ import print_function
+import sys
 from abc import ABC, abstractmethod
 import csv
 
+'''Class that reads CSV files'''
 class fileReader:
     def __init__(self):
         pass
@@ -10,7 +12,8 @@ class fileReader:
     def readCSV(filepath):
         '''Reads CSV and converts into 2d Array
 
-        :param filepath: filepath from directory of this file to the csv's directory
+        :param filepath: filepath from directory of this file to the csv's
+                         directory
         :type filepath: str
         :returns: 2d array
         '''
@@ -19,13 +22,9 @@ class fileReader:
             for row in csv.reader(file, quotechar='"', delimiter=',', \
                                   quoting=csv.QUOTE_ALL, skipinitialspace=True):
                 a.append(row)
-        '''if DEBUG:
-            print('fileReader readCSV')
-            for row in range(0,5):
-                print(a[row])
-            print('\n')'''
         return a
 
+'''Abstract class defining methods for database entries'''
 class databaseEntry(ABC):
 
     def __init__(self, input):
@@ -40,6 +39,7 @@ class databaseEntry(ABC):
     def getName(self):
         pass
 
+''''''
 class userEntry(databaseEntry, ABC):
 
     def __init__(self, input):
@@ -54,6 +54,7 @@ class userEntry(databaseEntry, ABC):
     def changeAmount(self):
         pass
 
+'''Formats individual entry from ingredients CSV'''
 class ingredient(databaseEntry):
     def __init__(self, inputArray):
         '''Formats array inputted from csv file of ingredients
@@ -94,6 +95,8 @@ class ingredient(databaseEntry):
         '''
         return self.category
 
+'''Extends from ingredient class with additional instance variable to count how
+much of the ingredient of is possession of the user'''
 class pantryEntry(ingredient, userEntry):
     def __init__(self, inputIngredient, amount):
         '''Extends from ingredient class. Adds instance variable to count the
@@ -123,6 +126,8 @@ class pantryEntry(ingredient, userEntry):
         '''
         self.amount += amount
 
+'''Formats ingredients database and has ability to search through it for
+specific ingredients'''
 class getIngredient:
 
     def __init__(self):
@@ -132,13 +137,6 @@ class getIngredient:
         self.ingredientsArray = fileReader.readCSV('ingredients.csv')
         for e in range(0, len(self.ingredientsArray)):
             self.ingredientsArray[e] = ingredient(self.ingredientsArray[e])
-        '''if DEBUG:
-            print('getIngredient init')
-            for i in range(1,7):
-                a = self.ingredientsArray[i]
-                alist = [a.getID(),a.getName(),a.getCategory()]
-                print(' '.join(map(str, alist)))
-            print('\n')'''
 
     def findEntry(self, input = None):
         id = None
@@ -154,43 +152,46 @@ class getIngredient:
             entryID = entry.getID()
             entryName = entry.getName()
             if id == entryID or name == entryName:
-                '''if DEBUG:
-                    print('entry '+entry.getName()+' found.\nid: '+str(id)+'\nentryID:'+str(entryID))'''
                 return entry
-        '''if DEBUG:
-            print('entry not found\nid: ' + str(id))'''
         return
 
+'''Creates user ingredient inventory and allows ability to add ingredients to it
+'''
 class pantry:
     def __init__(self):
         self.getIng = getIngredient()
         self.pantryList = []
 
     def addIngredient(self, id, amount):
-        '''if DEBUG:
-            print('pantry addIngredient')'''
         ingredient = self.getIng.findEntry(id)
-        if ingredient != None:
-            flag = False
-            for i in self.pantryList:
-                if ingredient.getID() == i.getID():
-                    flag = True
-            if not flag:
-                self.pantryList.append(pantryEntry(ingredient, 0))
-            self.increaseAmount(id, amount)
-            '''if DEBUG:
-                print('id %r found' % id)'''
-            return
-        '''if DEBUG:
-            print('id %r not found' % id)'''
+        if ingredient != None and self.findIngredient(id) == None:
+            self.pantryList.append(pantryEntry(ingredient, 0))
+        self.increaseAmount(id, amount)
         return
 
     def increaseAmount(self, ID, amount):
-        ingredient = self.getIng.findEntry(ID)
-        for i in self.pantryList:
-            if ingredient.getID() == i.getID():
-                i.changeAmount(amount)
-                return
+        ingredient = self.findIngredient(ID)
+        if ingredient != None:
+            ingredient.changeAmount(amount)
+            if ingredient.getAmount() <= 0:
+                self.pantryList.remove(ingredient)
+        return
+
+    def findIngredient(self, input = None):
+        id = None
+        name = None
+        if input == None:
+            return
+        elif type(input) is int:
+            id = int(input)
+        elif type(input) is str:
+            name = str(input)
+        for entryNum in range(0, len(self.pantryList)):
+            entry = self.pantryList[entryNum]
+            entryID = entry.getID()
+            entryName = entry.getName()
+            if id == entryID or name == entryName:
+                return entry
         return
 
     def filter(self, category):
@@ -203,12 +204,15 @@ class pantry:
                         filterArray.append(self.pantryList[i])
         return filterArray
 
-    def getPantryList(self):
-        return(self.pantryList)
+    def getPantryList(self, asString = False):
+        returnList = self.pantryList
+        if asString:
+            for index in range(0,len(self.pantryList)):
+                returnList[index] = returnList[index].getName() + '(' + \
+                                    str(returnList[index].getAmount())+')'
+        return returnList
 
-    def findEntry(self, input = None):
-        self.getIng.findEntry(input)
-
+'''Formats individual entry from recipe csv'''
 class recipe(databaseEntry):
 
     def __init__(self, inputArray2d):
@@ -282,7 +286,8 @@ class recipe(databaseEntry):
                 list = [] #will be returned
                 for e in range(1,len(array[0])):
                     if (array[0][e], array[1][e]) != ('',''):
-                        list.append((array[0][e], array[1][e]))
+                        newIngredient = getIngredient().findEntry(array[0][e])
+                        list.append((newIngredient, array[1][e]))
                 #print(list)
                 return category, list
             elif type == 'instructions':
@@ -383,13 +388,21 @@ class recipe(databaseEntry):
         '''
         return self.notes
 
-    def getIng(self):
+    def getIng(self, asString = False):
         '''Returns ingredients for recipe
 
         :return: dictionary of ingredients
         :rtype: dictionary
         '''
-        return self.ingredients
+        returnDict = self.ingredients
+        if asString:
+            for category in returnDict:
+                list = []
+                for ingredient in returnDict[category]:
+                    list.append((ingredient[0].getName(), ingredient[1]))
+                returnDict[category] = list
+                list = []
+        return returnDict
 
     def getIns(self):
         '''Returns instructions from recipe
@@ -402,6 +415,7 @@ class recipe(databaseEntry):
         list = [self.name, self.ingredients, self.instructions]
         print('\n'.join(map(str, list)))
 
+'''Formats recipe database and has ability to find specific recipes in it'''
 class getRecipes:
 
     def __init__(self):
@@ -411,20 +425,11 @@ class getRecipes:
         for num in range(0, len(recipeArray)):
             if recipeArray[num][0] != '' and len(entry) != 0:
                 entryFormatted = recipe(entry)
-                '''if DEBUG:
-                    print(entryFormatted.name)'''
                 self.recipeArray.append(entryFormatted)
                 entry = []
             entry.append(recipeArray[num])
         entryFormatted = recipe(entry)
-        '''if DEBUG:
-            print(entryFormatted.name)'''
         self.recipeArray.append(entryFormatted)
-        '''if DEBUG:
-            print('getRecipes init')
-            a = self.recipeArray[3]
-            print(a.debug())
-            print('\n')'''
 
     def findEntry(self, input = None):
         id = None
@@ -440,25 +445,21 @@ class getRecipes:
             entryID = entry.getID()
             entryName = entry.getName()
             if id == entryID or name == entryName:
-                '''if DEBUG:
-                    print('entry '+entry.getName()+' found.\nid: '+str(id)+'\nentryID:'+str(entryID))'''
                 return entry
-        '''if DEBUG:
-            print('entry not found\nid: ' + str(id))'''
         return
 
 DEBUG = True;
 if DEBUG:
+    print(sys.version)
     pantry = pantry()
     recipe = getRecipes()
 
     pantry.addIngredient(5, 10)
     pantry.addIngredient(250, 4)
     pantry.increaseAmount(250, 6)
-    for food in pantry.getPantryList():
-        print(', '.join(map(str,[food.getName(),food.getAmount()])))
+    print(pantry.getPantryList(True))
 
     meal = recipe.findEntry(1)
     dessert = recipe.findEntry('Yogurt & Fruit Parfaits')
     print('We will have ' + ' and '.join(map(str,[meal.getName(),dessert.getName()])))
-    print(meal.getIng())
+    print(meal.getIng(True))
