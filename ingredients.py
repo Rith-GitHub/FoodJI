@@ -2,6 +2,7 @@ from __future__ import print_function
 import sys
 from abc import ABC, abstractmethod
 import csv
+import math
 
 '''Class that reads CSV files'''
 class fileReader:
@@ -252,13 +253,25 @@ class recipe(databaseEntry):
             ingSection.append(inputArray2d[row][2:])
         #print('a')
         #print(ingSection)
-        self.ingredients = self._formatCategory(ingSection, 'ingredients', type = 'ingredients')
+        self.ingredients = self._formatCategory(ingSection, 'ingredients', \
+                                                type = 'ingredients')
         insSection = []
         for row in range(insIndex, len(inputArray2d)):
             insSection.append(inputArray2d[row][2:])
         #print('b')
         #print(insSection)
-        self.instructions = self._formatCategory(insSection, 'instructions', type = 'instructions')
+        self.instructions = self._formatCategory(insSection, 'instructions', \
+                                                 type = 'instructions')
+        if type(self.id) is int:
+            imagesrc = 'recipe images/'
+            if self.id > 0:
+                imagesrc += '0' * (3 - int(math.log10(self.id)+1)) + \
+                            str(self.id) + '/' + inputArray2d[0][9]
+            else:
+                imagesrc += '000/' + inputArray2d[0][9]
+            self.image = imagesrc
+        else:
+            self.image = None
 
     def _formatCategory(self, array, category, type):
         list = [] # list for bounds of each subsection
@@ -272,7 +285,8 @@ class recipe(databaseEntry):
                 subSection = []
                 if list.index(section)+1 != len(list):
                     indexOfNext = list.index(section)+1
-                    for row in range(section[1], list[indexOfNext][1]): #creates subArray
+                    for row in range(section[1], list[indexOfNext][1]):
+                        #creates subArray
                         subSection.append(array[row][1:])
                 else:
                     for row in range(section[1], len(array)):
@@ -426,9 +440,13 @@ class recipe(databaseEntry):
         '''
         return self.instructions
 
-    def debug(self):
-        list = [self.name, self.ingredients, self.instructions]
-        print('\n'.join(map(str, list)))
+    def getImagesrc(self):
+        '''
+
+        :returns: filepath to recipe image
+        :rtype: string
+        '''
+        return self.image
 
 '''Formats recipe database and has ability to find specific recipes in it'''
 class getRecipes:
