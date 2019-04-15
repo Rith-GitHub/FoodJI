@@ -2,6 +2,7 @@ from __future__ import print_function
 import sys
 from abc import ABC, abstractmethod
 import csv
+import math
 
 '''Class that reads CSV files'''
 class fileReader:
@@ -155,63 +156,6 @@ class getIngredient:
                 return entry
         return
 
-'''Creates user ingredient inventory and allows ability to add ingredients to it
-'''
-class pantry:
-    def __init__(self):
-        self.getIng = getIngredient()
-        self.pantryList = []
-
-    def addIngredient(self, id, amount):
-        ingredient = self.getIng.findEntry(id)
-        if ingredient != None and self.findIngredient(id) == None:
-            self.pantryList.append(pantryEntry(ingredient, 0))
-        self.increaseAmount(id, amount)
-        return
-
-    def increaseAmount(self, ID, amount):
-        ingredient = self.findIngredient(ID)
-        if ingredient != None:
-            ingredient.changeAmount(amount)
-            if ingredient.getAmount() <= 0:
-                self.pantryList.remove(ingredient)
-        return
-
-    def findIngredient(self, input = None):
-        id = None
-        name = None
-        if input == None:
-            return
-        elif type(input) is int:
-            id = int(input)
-        elif type(input) is str:
-            name = str(input)
-        for entryNum in range(0, len(self.pantryList)):
-            entry = self.pantryList[entryNum]
-            entryID = entry.getID()
-            entryName = entry.getName()
-            if id == entryID or name == entryName:
-                return entry
-        return
-
-    def filter(self, category):
-        filterArray = []
-        ingArray = self.getIng.ingredientsArray
-        for catNum in range(0,len(ingArray[0].getCategory())):
-            if category == ingArray[0].getCategory()[catNum]:
-                for i in self.pantryList:
-                    if int(self.pantryList[i][0][catNum]) == 1:
-                        filterArray.append(self.pantryList[i])
-        return filterArray
-
-    def getPantryList(self, asString = False):
-        returnList = self.pantryList
-        if asString:
-            for index in range(0,len(self.pantryList)):
-                returnList[index] = returnList[index].getName() + '(' + \
-                                    str(returnList[index].getAmount())+')'
-        return returnList
-
 '''Formats individual entry from recipe csv'''
 class recipe(databaseEntry):
 
@@ -251,14 +195,26 @@ class recipe(databaseEntry):
         for row in range(ingIndex, insIndex):
             ingSection.append(inputArray2d[row][2:])
         #print('a')
-        #print(ingSection)
-        self.ingredients = self._formatCategory(ingSection, 'ingredients', type = 'ingredients')
+        #print(' '*5+str(ingSection))
+        self.ingredients = self._formatCategory(ingSection, 'ingredients', \
+                                                type = 'ingredients')
         insSection = []
         for row in range(insIndex, len(inputArray2d)):
             insSection.append(inputArray2d[row][2:])
         #print('b')
-        #print(insSection)
-        self.instructions = self._formatCategory(insSection, 'instructions', type = 'instructions')
+        #print(' '*5+str(insSection))
+        self.instructions = self._formatCategory(insSection, 'instructions', \
+                                                 type = 'instructions')
+        if type(self.id) is int:
+            imagesrc = 'recipe images/'
+            if self.id > 0:
+                imagesrc += '0' * (3 - int(math.log10(self.id)+1)) + \
+                            str(self.id) + '/' + inputArray2d[0][9]
+            else:
+                imagesrc += '000/' + inputArray2d[0][9]
+            self.image = imagesrc
+        else:
+            self.image = None
 
     def _formatCategory(self, array, category, type):
         list = [] # list for bounds of each subsection
@@ -272,24 +228,34 @@ class recipe(databaseEntry):
                 subSection = []
                 if list.index(section)+1 != len(list):
                     indexOfNext = list.index(section)+1
-                    for row in range(section[1], list[indexOfNext][1]): #creates subArray
+                    for row in range(section[1], list[indexOfNext][1]):
+                        #creates subArray
                         subSection.append(array[row][1:])
                 else:
                     for row in range(section[1], len(array)):
                         subSection.append(array[row][1:])
                 #print(subSection)
+                if len(subSection) == 1 and type == 'ingredients':
+                    subSection.append(['']*len(subSection[0]))
+                #print(' '*7+str(subSection))
                 x, y = self._formatCategory(subSection, newCategory, type)
                 returnDict[x] = y
             return returnDict
         elif len(array) == 2:
-            if type == 'ingredients':
+            if type == 'ingredients' and category != 'ingredients':
                 list = [] #will be returned
-                for e in range(1,len(array[0])):
+                for e in range(0,len(array[0])):
                     if (array[0][e], array[1][e]) != ('',''):
                         newIngredient = getIngredient().findEntry(array[0][e])
                         list.append((newIngredient, array[1][e]))
-                #print(list)
+                #print(' '*9+str(list))
                 return category, list
+            elif type == 'ingredients' and category == 'ingredients':
+                dict = {}
+                #print(' '*7+str([array[0][1:], array[1][1:]]))
+                x,y = self._formatCategory([array[0][1:], array[1][1:]], array[0][0], type)
+                dict[x] = y
+                return dict
             elif type == 'instructions':
                 list = []
                 instructList = {}
@@ -298,29 +264,22 @@ class recipe(databaseEntry):
                         if e[b] != '':
                             list.append(e[b])
                     #print([list])
+                    #print(' '*7+str([e]))
                     x, y = self._formatCategory([e], e[0], type)
                     instructList[x] = y
                     list = []
                 return instructList
         else: #length of array is one
-            if type == 'ingredients':
+            if type == 'instructions' and category != 'instructions':
                 list = []
-                for e in array[0]:
-                    if e != '':
-                        list.append((e,))
-                #print(list)
-                return category, list
-            elif type == 'instructions' and category != 'instructions':
-                list = []
-                for e in range(1, len(array[0])):
+                for e in range(0, len(array[0])):
                     if array[0][e] != '':
                         list.append(array[0][e])
-                #print(category)
-                #print(list)
+                #print(' '*9+str(list))
                 return category, list
             elif type == 'instructions' and category == 'instructions':
                 dict = {}
-                #print(array)
+                #print(' '*7+str(array[0][1:]))
                 x,y = self._formatCategory([array[0][1:]], array[0][0], type)
                 dict[x] = y
                 return dict
@@ -360,6 +319,21 @@ class recipe(databaseEntry):
         '''
         return self.cookTime
 
+    def getTotalT(self, calcHours = False):
+        '''Returns total time to complete recipe
+
+        :rtype: int
+        '''
+        totalTime = self.prepTime + self.cookTime
+        if calcHours and totalTime >= 60:
+            minutes = totalTime % 60
+            hours = (totalTime - minutes) / 60
+            return hours, minutes
+        elif calcHours:
+            return 0, totalTime
+        else:
+            return totalTime
+
     def getServing(self):
         '''Returns number of servings
 
@@ -394,15 +368,17 @@ class recipe(databaseEntry):
         :return: dictionary of ingredients
         :rtype: dictionary
         '''
-        returnDict = self.ingredients
+        returnDict = {}
         if asString:
-            for category in returnDict:
+            for category in self.ingredients:
                 list = []
-                for ingredient in returnDict[category]:
+                for ingredient in self.ingredients[category]:
                     list.append((ingredient[0].getName(), ingredient[1]))
                 returnDict[category] = list
                 list = []
-        return returnDict
+            return returnDict
+        else:
+            return self.ingredients
 
     def getIns(self):
         '''Returns instructions from recipe
@@ -411,9 +387,13 @@ class recipe(databaseEntry):
         '''
         return self.instructions
 
-    def debug(self):
-        list = [self.name, self.ingredients, self.instructions]
-        print('\n'.join(map(str, list)))
+    def getImagesrc(self):
+        '''
+
+        :returns: filepath to recipe image
+        :rtype: string
+        '''
+        return self.image
 
 '''Formats recipe database and has ability to find specific recipes in it'''
 class getRecipes:
@@ -428,10 +408,63 @@ class getRecipes:
                 self.recipeArray.append(entryFormatted)
                 entry = []
             entry.append(recipeArray[num])
-        entryFormatted = recipe(entry)
-        self.recipeArray.append(entryFormatted)
+        else:
+            entryFormatted = recipe(entry)
+            self.recipeArray.append(entryFormatted)
+        if self.recipeArray[0].getID() == 'Index':
+            del self.recipeArray[0]
 
     def findEntry(self, input = None):
+        id = None
+        #name = None
+        if input == None:
+            return
+        elif type(input) is int:
+            id = int(input)
+        #elif type(input) is str:
+        #    name = str(input)
+        for entryNum in range(1, len(self.recipeArray)):
+            entry = self.recipeArray[entryNum]
+            entryID = entry.getID()
+        #    entryName = entry.getName()
+            if id == entryID: #or name == entryName:
+                return entry
+        return
+
+    def getRecipes(self, asString = False):
+        if asString:
+            returnList = []
+            for recipe in self.recipeArray:
+                returnList.append(recipe.getName())
+            return returnList
+        return self.recipeArray
+
+'''Environment for user inventory and recipe recommendations
+'''
+class environment:
+    def __init__(self):
+        self.getIng = getIngredient()
+        self.pantryList = []
+        self.recipes = getRecipes()
+        self.recommendations = []
+        #self.organize()
+
+    def addIngredient(self, id, amount):
+        ingredient = self.getIng.findEntry(id)
+        if ingredient != None and self.findIngredient(id) == None:
+            self.pantryList.append(pantryEntry(ingredient, 0))
+        self.increaseAmount(id, amount)
+        return
+
+    def increaseAmount(self, ID, amount):
+        ingredient = self.findIngredient(ID)
+        if ingredient != None:
+            ingredient.changeAmount(amount)
+            if ingredient.getAmount() <= 0:
+                self.pantryList.remove(ingredient)
+        return
+
+    def findIngredient(self, input = None):
         id = None
         name = None
         if input == None:
@@ -440,26 +473,113 @@ class getRecipes:
             id = int(input)
         elif type(input) is str:
             name = str(input)
-        for entryNum in range(1, len(self.recipeArray)):
-            entry = self.recipeArray[entryNum]
+        for entry in self.pantryList:
             entryID = entry.getID()
             entryName = entry.getName()
             if id == entryID or name == entryName:
                 return entry
         return
 
-DEBUG = True;
-if DEBUG:
-    print(sys.version)
-    pantry = pantry()
-    recipe = getRecipes()
+    def getPercent(self, input):
+        if isinstance(input, recipe): #if input is a recipe object
+            ingredients = input
+        else: #otherwise (assuming input is an id instead)
+            ingredients = self.recipes.findEntry(input)
+        totalRequired = 0 #amount of ingredients needed
+        totalPossessed = 0 #amount of ingredients in possession
+        ingredientsReq = []
+        for category in ingredients.getIng():
+            for ingredient in ingredients.getIng()[category]:
+                for e in ingredientsReq:
+                    if e[0] == ingredient[0]:
+                        e[1] += float(ingredient[1])
+                        break
+                else:
+                    if ingredient[1] != '':
+                        ingredientsReq.append([ingredient[0], float(ingredient[1])])
+                    else:
+                        ingredientsReq.append([ingredient[0], 0])
+        for e in ingredientsReq:
+            ingredientPos = self.findIngredient(e[0].getID())
+            totalRequired += e[1]
+            if isinstance(ingredientPos, pantryEntry) and \
+                          ingredientPos.getAmount() >= e[1]:
+                totalPossessed += e[1]
+            elif isinstance(ingredientPos, pantryEntry) and \
+                            ingredientPos.getAmount() > 0:
+                totalPossessed += ingredientPos.getAmount()
+        return totalPossessed*100//totalRequired
 
-    pantry.addIngredient(5, 10)
-    pantry.addIngredient(250, 4)
-    pantry.increaseAmount(250, 6)
-    print(pantry.getPantryList(True))
+    def quicksort(self,low=None,high=None,start=True,sortRecipes=False):
+        arr = self.recipes.recipeArray
+        if start:
+            low = 0
+            high = len(arr)-1
+        def partition(arr, low, high):
+            i = (low-1)
+            if sortRecipes:
+                pivot = self.getPercent(arr[high])
+            else:
+                pivot = arr[high]
+            for j in range(low, high):
+                if sortRecipes:
+                    check = self.getPercent(arr[j])
+                else:
+                    check = arr[j]
+                if check >= pivot:
+                    i += 1
+                    arr[i], arr[j] = arr[j], arr[i]
+            arr[i+1], arr[high] = arr[high], arr[i+1]
+            return (i+1)
+        if low < high:
+            pi = partition(arr, low, high)
+            self.quicksort(low=low,high =pi-1,start=False, \
+                           sortRecipes=sortRecipes)
+            self.quicksort(low=pi+1,high=high,start=False, \
+                           sortRecipes=sortRecipes)
 
-    meal = recipe.findEntry(1)
-    dessert = recipe.findEntry('Yogurt & Fruit Parfaits')
-    print('We will have ' + ' and '.join(map(str,[meal.getName(),dessert.getName()])))
-    print(meal.getIng(True))
+    def filter(self, category):
+        filterArray = []
+        ingArray = self.getIng.ingredientsArray
+        for catNum in range(0,len(ingArray[0].getCategory())):
+            if category == ingArray[0].getCategory()[catNum]:
+                for i in self.pantryList:
+                    if int(self.pantryList[i][0][catNum]) == 1:
+                        filterArray.append(self.pantryList[i])
+        return filterArray
+
+    def getPantryList(self, asString = False):
+        returnList = []
+        if asString:
+            for index in range(0,len(self.pantryList)):
+                returnList.append(self.pantryList[index].getName() + '(' + \
+                                  str(self.pantryList[index].getAmount())+')')
+            return returnList
+        return self.pantryList
+
+DEMO = True;
+if DEMO:
+    print(sys.version)       #Print Python Version
+    pantry = environment()   #Initialize environment
+    recipes = pantry.recipes #Save instance variable as shorter name
+                             #   (It's just easier to understand this way)
+
+    pantry.addIngredient('Mitsuba', 10)    #Add 10 'Mitsuba' to inventory
+    pantry.addIngredient('Green Onion', 4) #Add 4 'Green Onion'
+    pantry.addIngredient(416, 2)           #Add 2 of ingredient #416
+                                           #   (vanilla yogurt)
+    print(pantry.getPantryList(True))      #List inventory (parameter set to
+                                           #   True makes it return array as
+                                           #   string)
+
+    meal = recipes.findEntry(1)     #Save recipe #1 (Beef Udon) as 'meal'
+    print('Try ' + meal.getName())  #Print name of 'meal'
+    print(meal.getIng(True))        #Print ingredients required for recipe
+                                    #   Again, parameter True makes it string
+    print(pantry.getPercent(meal))  #Print percent of required ingredients in
+                                    #   inventory
+
+    print(recipes.getRecipes(True))      #Print original order of recipes
+    pantry.quicksort(sortRecipes = True) #Reorders recipes based on percent of
+                                         #   completion
+    print(recipes.getRecipes(True))      #Prints new order of recipes
