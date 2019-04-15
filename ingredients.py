@@ -408,8 +408,11 @@ class getRecipes:
                 self.recipeArray.append(entryFormatted)
                 entry = []
             entry.append(recipeArray[num])
-        entryFormatted = recipe(entry)
-        self.recipeArray.append(entryFormatted)
+        else:
+            entryFormatted = recipe(entry)
+            self.recipeArray.append(entryFormatted)
+        if self.recipeArray[0].getID() == 'Index':
+            del self.recipeArray[0]
 
     def findEntry(self, input = None):
         id = None
@@ -499,10 +502,41 @@ class environment:
         for e in ingredientsReq:
             ingredientPos = self.findIngredient(e[0].getID())
             totalRequired += e[1]
-            if ingredientPos != None and ingredientPos.getAmount() >= \
-            e[1]:
+            if isinstance(ingredientPos, pantryEntry) and \
+                          ingredientPos.getAmount() >= e[1]:
                 totalPossessed += e[1]
+            elif isinstance(ingredientPos, pantryEntry) and \
+                            ingredientPos.getAmount() > 0:
+                totalPossessed += ingredientPos.getAmount()
         return totalPossessed*100//totalRequired
+
+    def quicksort(self,low=None,high=None,start=True,sortRecipes=False):
+        arr = self.recipes.recipeArray
+        if start:
+            low = 0
+            high = len(arr)-1
+        def partition(arr, low, high):
+            i = (low-1)
+            if sortRecipes:
+                pivot = self.getPercent(arr[high])
+            else:
+                pivot = arr[high]
+            for j in range(low, high):
+                if sortRecipes:
+                    check = self.getPercent(arr[j])
+                else:
+                    check = arr[j]
+                if check >= pivot:
+                    i += 1
+                    arr[i], arr[j] = arr[j], arr[i]
+            arr[i+1], arr[high] = arr[high], arr[i+1]
+            return (i+1)
+        if low < high:
+            pi = partition(arr, low, high)
+            self.quicksort(low=low,high =pi-1,start=False, \
+                           sortRecipes=sortRecipes)
+            self.quicksort(low=pi+1,high=high,start=False, \
+                           sortRecipes=sortRecipes)
 
     def filter(self, category):
         filterArray = []
@@ -523,18 +557,29 @@ class environment:
             return returnList
         return self.pantryList
 
+DEMO = True;
+if DEMO:
+    print(sys.version)       #Print Python Version
+    pantry = environment()   #Initialize environment
+    recipes = pantry.recipes #Save instance variable as shorter name
+                             #   (It's just easier to understand this way)
 
-DEBUG = True;
-if DEBUG:
-    print(sys.version)
-    pantry = environment()
-    recipes = getRecipes()
+    pantry.addIngredient('Mitsuba', 10)    #Add 10 'Mitsuba' to inventory
+    pantry.addIngredient('Green Onion', 4) #Add 4 'Green Onion'
+    pantry.addIngredient(416, 2)           #Add 2 of ingredient #416
+                                           #   (vanilla yogurt)
+    print(pantry.getPantryList(True))      #List inventory (parameter set to
+                                           #   True makes it return array as
+                                           #   string)
 
-    pantry.addIngredient('Mitsuba', 10)
-    pantry.addIngredient('Green Onion', 4)
-    print(pantry.getPantryList(True))
+    meal = recipes.findEntry(1)     #Save recipe #1 (Beef Udon) as 'meal'
+    print('Try ' + meal.getName())  #Print name of 'meal'
+    print(meal.getIng(True))        #Print ingredients required for recipe
+                                    #   Again, parameter True makes it string
+    print(pantry.getPercent(meal))  #Print percent of required ingredients in
+                                    #   inventory
 
-    meal = recipes.findEntry(1)
-    print('Try ' + meal.getName())
-    print(meal.getIng(True))
-    print(pantry.getPercent(meal))
+    print(recipes.getRecipes(True))      #Print original order of recipes
+    pantry.quicksort(sortRecipes = True) #Reorders recipes based on percent of
+                                         #   completion
+    print(recipes.getRecipes(True))      #Prints new order of recipes
